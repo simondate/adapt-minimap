@@ -11,16 +11,16 @@ define(function(require) {
     });
 
     Adapt.on('pageView:preRender', function(pageView) {
-    
+
     });
 
     Adapt.on('pageView:postRender', function(pageView) {
-    
+
     });
 
     // init Splitscreen View ?
     Adapt.on('router:page', function(pageModel) {
-        if (pageModel.has('_splittscreen') && pageModel.get('_splittscreen')._isEnabled && pageModel.has('_minimap')) {
+        if (pageModel.has('_splitscreen') && pageModel.get('_splitscreen')._isEnabled && pageModel.has('_minimap')) {
             new MinimapView({model: pageModel});
         }
     });

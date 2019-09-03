@@ -1,5 +1,5 @@
 /*
-    
+
 pathData = [
     {
         componentId: "c-10",
@@ -16,23 +16,22 @@ pathData = [
 */
 
 define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Backbone, _, Velocity) {
-   
+
     var MinimapView = Backbone.View.extend({
 
         className: 'minimap-container',
         debug: false,
 
         initialize: function() {
-            if (Modernizr.svg) {
-                $('html').addClass('svg');
-            } else {
-                $('html').addClass('no-svg');
-                return;
-            }
+            // if (Modernizr.svg) {
+            //     $('html').addClass('svg');
+            // } else {
+            //     $('html').addClass('no-svg');
+            //     return;
+            // }
 
             this.pathData = [];
             this.$window = $(window);
-
             this.listenTo(Adapt, 'remove', this.remove);
             this.listenTo(Adapt, 'pageView:postRender', this.onPageViewPostRender);
             this.listenTo(Adapt, 'pageView:ready', this.onPageViewReady);
@@ -45,15 +44,15 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
 
         render: function() {
             var template = Handlebars.templates.minimap;
-            this.$el.html(template());
+            this.$el.html(template(this.model.get('_minimap')));
 
             return this;
         },
 
         setPathSrc: function() {
-            var config = this.model.get('_minimap');
-            this.iconAnimation = config._iconAnimation;
-            $('#minimap-doc').attr('data', config._path);
+            // var config = this.model.get('_minimap');
+            // this.iconAnimation = config._iconAnimation;
+            // $('#minimap-doc').attr('data', config._path);
         },
 
         setupComponentCompleteListener: function(componentModel) {
@@ -113,9 +112,11 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
         },
 
         setupScrollCache: function() {
-            if (!this.svgDoc) {
-                return;
-            }
+
+          return ;
+            // if (!this.svgDoc) {
+            //     return;
+            // }
 
             for (var i = 0; i < this.pathData.length; i++) {
                 var path = this.svgDoc.getElementById(this.pathData[i].progressId);
@@ -126,7 +127,7 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
                 } else {
                     pathLength = this.pathData[i].view.$el.height();
                 }
-                
+
                 this.pathData[i].pathLength = pathLength;
                 this.pathData[i].offsetTop = this.pathData[i].view.$el.offset().top;
             }
@@ -135,19 +136,19 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
         },
 
         onMinimapLoad: function() {
-            this.svgDoc = document.getElementById("minimap-doc").getSVGDocument();
+            // this.svgDoc = document.getElementById("minimap-doc").getSVGDocument();
 
-            this.setupScrollCache();
-            this.setupPaths();
+            // this.setupScrollCache();
+            // this.setupPaths();
             this.setupNavigationEvents();
-            
+
             this.checkMinimapComponentsCompleted();
 
             // window.svgDoc = this.svgDoc;
         },
 
         markComponentInMinimapAsComplete: function(minimapModel) {
-            var elm = this.svgDoc.getElementById(minimapModel._iconId); 
+            var elm = this.svgDoc.getElementById(minimapModel._iconId);
             for (var i = 0; i < this.iconAnimation.length; i++) {
                 Velocity(elm, this.iconAnimation[i][0], this.iconAnimation[i][1]);
             }
@@ -175,7 +176,7 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
             if (!event) {
                 return;
             }
-            
+
             var parentGroup = $(event.target).parent('g');
             var id = parentGroup[0].id;
 
@@ -223,7 +224,7 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
             var scrollDistance = this.pathData[currentPathIndex+1].offsetTop - this.pathData[currentPathIndex].offsetTop;
 
             var pathLength = this.pathData[currentPathIndex].pathLength - (this.pathData[currentPathIndex].pathLength * (scrolledDistance / scrollDistance));
-            
+
             if (pathLength <= 0) {
                 pathLength = 0;
             }
@@ -240,8 +241,8 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
 
         highlightLabel: function(currentPathIndex) {
             // index -1 -> no item active -> remove classes
-            // add id of active label as class to the root element 
-            
+            // add id of active label as class to the root element
+
             var $layer = $(this.svgDoc.getElementById('layer1'));
 
             if (currentPathIndex === -1) {
@@ -285,10 +286,10 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
             this.$window.trigger('scroll');
         },
 
-        remove: function() {            
+        remove: function() {
             this.$window.off('scroll');
             $('#minimap-doc').off('load');
-            
+
             _.each(this.pathData, _.bind(function(item) {
                 $(this.svgDoc.getElementById(item.iconId)).off('click');
             }, this));
