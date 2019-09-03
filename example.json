@@ -26,9 +26,9 @@
     ]
 }
 
-// To go on a component
+// To go on a block
 "_minimap": {
-    "_labelId": "label-1",
-    "_progressId": "path-1",
-    "_iconId": "base-1"
+  "_isEnabled": true,
+  "_top": 20,
+  "_left": 20
 }

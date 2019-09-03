@@ -20,7 +20,10 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
     var MinimapView = Backbone.View.extend({
 
         className: 'minimap-container',
-        debug: false,
+
+        events: {
+            'click .minimap-button': 'onButtonClick'
+        },
 
         initialize: function() {
             // if (Modernizr.svg) {
@@ -38,15 +41,40 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
             this.listenTo(Adapt, 'componentView:postRender', this.onComponentViewPostRender);
             this.listenTo(Adapt, 'device:resize', this.onDeviceResize);
 
+
             this.setupScrollHandler();
             this.render();
         },
 
         render: function() {
             var template = Handlebars.templates.minimap;
-            this.$el.html(template(this.model.get('_minimap')));
+            var buttons = this.getButtons();
+            this.$el.html(template({model: this.model.get('_minimap'), buttons}));
 
             return this;
+        },
+
+        getButtons: function() {
+          console.log(this.model);
+          var blocks = this.model.findDescendantModels('blocks');
+          var e = _.filter(blocks, function(block) {
+              return !(!block.get("_minimap") || !block.get("_minimap")._isEnabled);
+          });
+          return _.map(e, function(block) {
+              return {
+                "_id": block.get("_id"),
+                "_position": block.get("_minimap")
+              }
+          });
+        },
+
+        onButtonClick: function(event) {
+          if(event && event.preventDefault) event.preventDefault();
+          console.log($(event.currentTarget).data("id"))
+          var $block = $(event.currentTarget).data("id");
+          Adapt.scrollTo('.' + $block, {
+            duration: 400
+          });
         },
 
         setPathSrc: function() {
@@ -257,12 +285,12 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
         onPageViewReady: function(pageView) {
             this.setPathSrc();
 
-            if (this.debug) {
-                this.showScrollMarker(pageView);
-            }
+            // if (this.debug) {
+            //     this.showScrollMarker(pageView);
+            // }
 
-            this.pathData;
-            Adapt;
+            // this.pathData;
+            // Adapt;
         },
 
 
