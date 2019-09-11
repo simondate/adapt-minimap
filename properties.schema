@@ -25,7 +25,7 @@
               "properties": {
                 "_path": {
                     "type":"string",
-                    "required":true,
+                    "required": false,
                     "title": "Background image",
                     "default": "",
                     "inputType": "Asset:image",
@@ -44,7 +44,7 @@
           "properties":{
             "_minimap": {
               "type":"object",
-              "required":true,
+              "required": false,
               "legend": "Minimap",
               "properties":{
                 "_isEnabled": {
