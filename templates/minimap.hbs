@@ -1,11 +1,5 @@
-{{!-- <object id="minimap-doc" type="image/svg+xml" data="{{_pathSrc}}">
-Your browser does not support SVG
-</object> --}}
-{{!-- <iframe id="minimap-doc" type="image/svg+xml" src="" height="100%" width="100%"></iframe> --}}
-<!-- <object id="minimap-doc" type="image/svg+xml" data="" height="100%" width="100%"></object> -->
-{{log this}}
 <div class='minimap' style="background-image:url('{{model._path}}')">
    {{#each buttons}}
-     <button class="minimap-button" data-id="{{_id}}" style="top:{{_position._top}}%; left:{{_position._left}}%;"></button>
+     <button class="minimap-button" data-id="{{_id}}" style="top:{{_position._top}}%; left:{{_position._left}}%;"><div class="minimap-button-icon icon icon-pin"/></button>
    {{/each}}
 </div>

@@ -17,13 +17,65 @@
           "type":"object"
         },
         "contentobject": {
-          "type":"object"
+          "type":"object",
+          "properties": {
+            "_minimap": {
+              "type": "object",
+              "legend": "Minimap",
+              "properties": {
+                "_path": {
+                    "type":"string",
+                    "required":true,
+                    "title": "Background image",
+                    "default": "",
+                    "inputType": "Asset:image",
+                    "validators": ["required"],
+                    "help": "The image of the map"
+                }
+              }
+            }
+          }
         },
         "article": {
           "type":"object"
         },
         "block": {
-          "type":"object"
+          "type":"object",
+          "properties":{
+            "_minimap": {
+              "type":"object",
+              "required":true,
+              "legend": "Minimap",
+              "properties":{
+                "_isEnabled": {
+                  "type": "boolean",
+                  "required":true,
+                  "default": true,
+                  "title": "Enabled?",
+                  "inputType": "Checkbox",
+                  "validators": []
+                },
+                "_top": {
+                    "type":"number",
+                    "required":true,
+                    "default": 50,
+                    "title": "Top",
+                    "inputType": "Number",
+                    "validators": ["number"],
+                    "help": "% from top of display area to show"
+                },
+                "_left": {
+                    "type":"number",
+                    "required":true,
+                    "default": 50,
+                    "title": "Left",
+                    "inputType": "Number",
+                    "validators": ["number"],
+                    "help": "% from left of display area to show"
+                }
+              }
+            }
+          }
         },
         "component": {
           "type":"object"
