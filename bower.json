@@ -4,9 +4,9 @@
     "framework": "^2.0.0",
     "homepage": "https://github.com/LearnChamp/adapt-minimap",
     "issues": "https://github.com/LearnChamp/adapt-minimap/issues",
-    "displayName": "mini map",
+    "displayName": "Minimap",
     "extension": "minimap",
-    "description": "",
+    "description": "Use with Splitscreen to add a map to side of screen",
     "main": "/js/adapt-minimap.js",
     "keywords": [
         "adapt-plugin",

@@ -1,29 +1,6 @@
 // To go on a contentObject
 "_minimap": {
-    "_path": "course/en/images/wien.svg",
-    "_iconAnimation": [
-        [
-            {
-                "opacity": 1,
-                "r": "+=10"
-            },
-            {
-                "duration": 500,
-                "easing": "swing"
-            }
-        ],
-        [
-            {
-                "opacity": 1,
-                "r": "-=10",
-                "fill": "#005384"
-            },
-            {
-                "duration": 500,
-                "easing": "swing"
-            }
-        ]
-    ]
+    "_path": "course/en/images/wien.jpg"
 }
 
 // To go on a block
