@@ -44,6 +44,7 @@ define(['coreJS/adapt','backbone','underscore','velocity'], function(Adapt, Back
 
             this.setupScrollHandler();
             this.render();
+            this.onDeviceResize();
         },
 
         render: function() {
